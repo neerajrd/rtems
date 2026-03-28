@@ -56,7 +56,17 @@ SECTION_FLAGS = -ffunction-sections -fdata-sections
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-How to test:
+How to test on rpi3:
+
+build/arm/raspberrypi2/testsuites/samples
+
+arm-rtems7-objcopy -O binary titan.exe kernel.img
+cp kernel.img /media/neeraj/1CBB-3C2C/kernel.img 
+umount /media/neeraj/*
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+How to test on nucleo-h753zi:
 
 cd build/arm/nucleo-h753zi/testsuites/samples/
 
@@ -70,14 +80,5 @@ arm-rtems7-objcopy -O binary hello.exe hello.bin
 Flash hello.bin using STM32CubeProg
 
 Note: Install STM32CubeProg for Linux.
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-Following is the sample path:
-
-cd ./testsuites/samples/hello/
-
-$ ls
-hello.doc  hello.scn  init.c
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
