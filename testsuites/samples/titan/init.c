@@ -16,56 +16,50 @@
 
 const char rtems_test_name[] = "HELLO JFFS2";
 
-/* -------- Flash Configuration -------- */
+/* Block Configuration */
 #define BLOCK_SIZE (32UL * 1024UL)
-#define FLASH_SIZE (32UL * BLOCK_SIZE)
+#define STORAGE_SIZE (32UL * BLOCK_SIZE)
 
-/* -------- Flash Control Structure -------- */
+/* Block Control Structure */
 typedef struct {
   rtems_jffs2_flash_control super;
-  unsigned char area[FLASH_SIZE];
-} flash_control;
+  unsigned char area[STORAGE_SIZE];
+} block_control;
 
-static flash_control flash_instance;
+static block_control block_instance;
 
-/* -------- Helper -------- */
-static flash_control *get_flash_control(rtems_jffs2_flash_control *super)
-{
-  return (flash_control *) super;
-}
-
-/* -------- Flash Ops -------- */
-static int flash_read(
+/* Block Ops */
+static int block_read(
   rtems_jffs2_flash_control *super,
   uint32_t offset,
   unsigned char *buffer,
   size_t size
 )
 {
-  flash_control *self = get_flash_control(super);
+  block_control *self = (block_control *) super;
 
-  printf("[FLASH READ] offset=%u size=%zu\n", offset, size);
+  // printf("[BLOCK READ] offset=%u size=%zu\n", offset, size);
 
-  if ((offset + size) > FLASH_SIZE)
+  if ((offset + size) > STORAGE_SIZE)
     return -1;
 
   memcpy(buffer, &self->area[offset], size);
   return 0;
 }
 
-static int flash_write(
+static int block_write(
   rtems_jffs2_flash_control *super,
   uint32_t offset,
   const unsigned char *buffer,
   size_t size
 )
 {
-  flash_control *self = get_flash_control(super);
+  block_control *self = (block_control *) super;
   size_t i;
 
-  printf("[FLASH WRITE] offset=%u size=%zu\n", offset, size);
+  // printf("[BLOCK WRITE] offset=%u size=%zu\n", offset, size);
 
-  if ((offset + size) > FLASH_SIZE)
+  if ((offset + size) > STORAGE_SIZE)
     return -1;
 
   for (i = 0; i < size; ++i) {
@@ -75,29 +69,29 @@ static int flash_write(
   return 0;
 }
 
-static int flash_erase(
+static int block_erase(
   rtems_jffs2_flash_control *super,
   uint32_t offset
 )
 {
-  flash_control *self = get_flash_control(super);
+  block_control *self = (block_control *) super;
 
-  printf("[FLASH ERASE] offset=%u size=%lu\n", offset, BLOCK_SIZE);
+  // printf("[BLOCK ERASE] offset=%u size=%lu\n", offset, BLOCK_SIZE);
 
-  if ((offset + BLOCK_SIZE) > FLASH_SIZE)
+  if ((offset + BLOCK_SIZE) > STORAGE_SIZE)
     return -1;
 
   memset(&self->area[offset], 0xFF, BLOCK_SIZE);
   return 0;
 }
 
-/* -------- Mount Data (No Compressor) -------- */
+/* Mount Data */
 static const rtems_jffs2_mount_data mount_data = {
-  .flash_control = &flash_instance.super,
+  .flash_control = &block_instance.super,
   .compressor_control = NULL
 };
 
-/* -------- Init Task -------- */
+/* Init Task */
 static rtems_task Init(rtems_task_argument ignored)
 {
   int rv;
@@ -110,16 +104,16 @@ static rtems_task Init(rtems_task_argument ignored)
   rtems_print_printer_fprintf_putc(&rtems_test_printer);
   TEST_BEGIN();
 
-  /* Initialize flash */
-  memset(flash_instance.area, 0xFF, FLASH_SIZE);
+  /* Initialize block storage */
+  memset(block_instance.area, 0xFF, STORAGE_SIZE);
 
-  /* Setup flash control */
-  flash_instance.super.block_size = BLOCK_SIZE;
-  flash_instance.super.flash_size = FLASH_SIZE;
-  flash_instance.super.read = flash_read;
-  flash_instance.super.write = flash_write;
-  flash_instance.super.erase = flash_erase;
-  flash_instance.super.device_identifier = 0xc01dc0fe;
+  /* Setup block control */
+  block_instance.super.block_size = BLOCK_SIZE;
+  block_instance.super.flash_size = STORAGE_SIZE;
+  block_instance.super.read = block_read;
+  block_instance.super.write = block_write;
+  block_instance.super.erase = block_erase;
+  block_instance.super.device_identifier = 0xc01dc0fe;
 
   /* Mount filesystem */
   rv = mount_and_make_target_path(
@@ -138,7 +132,7 @@ static rtems_task Init(rtems_task_argument ignored)
 
   printf("Mounted JFFS2 at /jffs2\n");
 
-  /* -------- File Create & Write -------- */
+  /* File Write */
   fd = open("/jffs2/test.txt", O_CREAT | O_WRONLY, 0777);
   if (fd < 0) {
     printf("File open failed: %s\n", strerror(errno));
@@ -150,7 +144,7 @@ static rtems_task Init(rtems_task_argument ignored)
   close(fd);
   printf("File written\n");
 
-  /* -------- File Read -------- */
+  /* File Read */
   fd = open("/jffs2/test.txt", O_RDONLY);
   if (fd < 0) {
     printf("File open (read) failed: %s\n", strerror(errno));
@@ -162,8 +156,6 @@ static rtems_task Init(rtems_task_argument ignored)
   close(fd);
 
   printf("Read from file: %s\n", read_buf);
-
-  printf("Hello World\n");
 
   TEST_END();
   rtems_test_exit(0);
