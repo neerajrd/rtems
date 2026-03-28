@@ -1,0 +1,180 @@
+Project Title
+Port LittleFS to RTEMS
+
+Google Summer of Code Program 2026 Project Proposal
+
+Name
+Neeraj Deshpande
+
+Discord Handle
+<to be filled>
+
+Discourse Username
+<to be filled>
+
+Email
+<to be filled>
+
+University
+MIT World Peace University, Pune
+
+----------------------------------------------------------------------------------------------------
+
+Project Abstract
+
+Port LittleFS v2 into RTEMS as a native filesystem integrated with the RTEMS VFS layer, enabling reliable flash-based storage with wear leveling and power-loss resilience, while ensuring forward compatibility for LittleFS v3.
+
+Project Scope
+
+Medium (approx. 175 hours)
+
+Project Description
+
+RTEMS currently lacks a lightweight, flash-optimized filesystem suitable for embedded systems with constrained memory and power-loss scenarios. LittleFS addresses this gap by providing a small, resilient filesystem designed for microcontrollers.
+
+This project will integrate LittleFS into RTEMS under /contrib and implement a wrapper layer mapping RTEMS VFS operations to LittleFS APIs. This will provide RTEMS with a modern, robust filesystem alternative suitable for flash storage. I chose this project due to my background in embedded systems and prior work on a demo LittleFS patch for RTEMS.
+
+Maintenance will be ensured by keeping the wrapper modular and well-documented, enabling future contributors to extend or maintain the code easily.
+
+Project Deliverables
+
+- LittleFS v2 integrated under /contrib
+- RTEMS VFS wrapper implementation
+- Block device interface integration (read/prog/erase/sync)
+- Support for file operations (open/read/write/close/lseek)
+- Directory operations (readdir, mkdir, traversal)
+- Metadata operations (stat, statvfs, rename, truncate)
+- Test application and validation
+- Documentation (design + usage + tutorial)
+- Future contributor guide for continuation (v3 support)
+
+GSoC Timeline
+
+June 7 (coding begins)
+- RTEMS build environment ready
+- LittleFS studied and initial integration prepared
+- Development repository setup and shared with mentors
+
+July 12-16 (Midterm Evaluation)
+- Block device integration complete
+- Mount/unmount working
+- Core file operations implemented
+- Basic filesystem functional end-to-end
+
+August 16-August 23 (Final Evaluation)
+- Full file + directory + metadata operations complete
+- Stable integration with RTEMS VFS
+- Testing and validation completed
+- Documentation and tutorial prepared
+
+August 31 (Final Results Announced)
+- Code cleanup and refinements completed
+- Mentor feedback addressed
+
+Post GSoC
+- Continue improving LittleFS integration
+- Work towards LittleFS v3 support
+- Contribute maintenance and enhancements to RTEMS
+
+Proposed Schedule
+
+March 14 - March 24 (Application Period)
+- Prepare and refine proposal
+- Submit demo patch
+- Interact with mentors and gather feedback
+
+March 26 - April 22 (Acceptance Waiting Period)
+- Continue contributing small improvements
+- Study RTEMS VFS and LittleFS internals
+- Refine design based on mentor inputs
+
+April 23 - May 23 (Community Bonding Period)
+- Study RTEMS VFS internals (mount, handlers, eval_path)
+- Study LittleFS APIs and block model
+- Analyze JFFS2 wrapper
+- Finalize architecture and data structures
+- Setup development and test environment
+
+May 24 - June 26 (First Half)
+- Implement block device callbacks
+- Integrate with RTEMS flash driver
+- Implement mount/unmount
+- Create filesystem operations table
+- Implement node abstraction and path lookup
+- Implement core file operations
+- Submit code regularly for review
+
+June 27 - August 23 (Second Half)
+- Implement directory operations (readdir, mkdir)
+- Implement metadata operations (stat, rename, truncate)
+- Improve error handling and robustness
+- Add optional features if feasible
+- Perform stress and performance testing
+- Prepare documentation and tutorial
+- Submit final code
+
+Future Improvements
+
+- Full support for LittleFS v3
+- Performance optimizations
+- Support for additional RTEMS block devices
+- Extended filesystem features
+
+Continued Involvement
+
+I plan to continue contributing to RTEMS beyond GSoC by maintaining the LittleFS integration, reviewing patches, and supporting future contributors. I aim to grow into an active contributor in RTEMS filesystem development.
+
+Other Commitments
+
+I do not have any major commitments during the GSoC period and will dedicate approximately 15 hours per week consistently.
+
+Eligibility
+
+I confirm that I meet the eligibility criteria defined by GSoC 2026 rules.
+
+Major Challenges foreseen
+
+- Mapping RTEMS VFS to LittleFS APIs correctly
+- Handling block device abstraction across platforms
+- Ensuring robustness under edge cases
+
+Mitigation:
+- Use JFFS2 wrapper as reference
+- Validate incrementally
+- Regular mentor feedback
+
+References
+
+- https://github.com/littlefs-project/littlefs
+- https://github.com/littlefs-project/littlefs/pull/1111
+- RTEMS documentation and source tree
+
+Relevant Background Experience
+
+- Embedded systems development
+- C programming
+- Prior LittleFS RTEMS demo patch (March 22, 2026)
+- Familiarity with RTOS and filesystem concepts
+
+Personal
+
+I am currently associated with MIT World Peace University, Pune. I am deeply interested in embedded systems, particularly filesystem and storage layers.
+
+I learned about RTEMS through embedded systems work and open-source exploration.
+
+Experience
+
+Free Software Experience/Contributions:
+- Submitted LittleFS demo patch for RTEMS
+
+Language Skill Set:
+- C (strong)
+- C++ (moderate)
+- Python (basic)
+
+Related Research and Work Experience:
+- Embedded systems development experience
+- Work on storage and communication subsystems
+
+Reference Links and Web URLs:
+<to be filled>
