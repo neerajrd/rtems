@@ -1,0 +1,83 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Forked: https://github.com/rtems/rtems
+
+as
+
+https://github.com/neerajrd/rtems
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+JFFS2 help page:
+
+https://docs.rtems.org/doxygen/5.2/group__JFFS2.html
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+How to build RTEMS:
+
+--------------------------------------------------------------------------------
+
+Build toolchain:
+
+cd /data/ML03/RTEMS
+
+git clone https://github.com/RTEMS/rtems-source-builder.git
+cd rtems-source-builder
+cd rtems
+
+../source-builder/sb-set-builder --jobs=2 --trace --prefix=/data/ML03/RTEMS/toolchain 7/rtems-arm
+
+export PATH=/data/ML03/RTEMS/toolchain/bin:$PATH
+
+--------------------------------------------------------------------------------
+
+Build rtems:
+
+cd /data/ML03/RTEMS
+
+# Clone source code
+# git clone https://gitlab.rtems.org/rtems/rtos/rtems.git
+git clone git@github_neerajrd:neerajrd/rtems.git
+cd rtems
+
+# Configure for board
+# ./waf bspdefaults --rtems-bsps=arm/nucleo-h753zi > config.ini
+./waf bspdefaults --rtems-bsps=arm/raspberrypi2 > config.ini
+
+Note: It adds following line multiple times in config.ini. Keep only one and comment others.
+
+SECTION_FLAGS = -ffunction-sections -fdata-sections
+
+# Build RTEMS kernel
+./waf configure --rtems-config=config.ini --prefix=/data/ML03/RTEMS/main
+./waf
+./waf install
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+How to test:
+
+cd build/arm/nucleo-h753zi/testsuites/samples/
+
+$ ls *.exe
+base_sp.exe  hello.exe  ...
+
+There are many sample executables here. To try hello.exe:
+
+arm-rtems7-objcopy -O binary hello.exe hello.bin
+
+Flash hello.bin using STM32CubeProg
+
+Note: Install STM32CubeProg for Linux.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Following is the sample path:
+
+cd ./testsuites/samples/hello/
+
+$ ls
+hello.doc  hello.scn  init.c
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
