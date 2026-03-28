@@ -8,7 +8,11 @@ cxxflags: []
 enabled-by: true
 features: c cprogram
 includes: []
-ldflags: []
+ldflags:
+- -Wl,--start-group
+- -ljffs2
+- -lz
+- -Wl,--end-group
 links: []
 source:
 - testsuites/samples/titan/init.c
