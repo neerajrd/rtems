@@ -58,6 +58,26 @@ SECTION_FLAGS = -ffunction-sections -fdata-sections
 
 How to test on rpi3:
 
+--------------------------------------------------------------------------------
+
+neeraj@nebula:/media/neeraj/07AC-51E5$ cat config.txt 
+# --- Core Settings ---
+arm_64bit=0            # Force 32-bit mode
+enable_uart=1          # Enable the serial console
+core_freq=250          # Fix frequency for stable UART baud rate
+dtoverlay=disable-bt   # Give the "good" UART (PL011) to RTEMS
+
+# --- Memory Loading ---
+# Point to the 2MB boundary, NOT the 0x200080 address
+kernel=kernel.img
+kernel_address=0x00200000
+
+# --- Cleaning up the boot ---
+disable_commandline_tags=1
+gpu_mem=32
+
+--------------------------------------------------------------------------------
+
 build/arm/raspberrypi2/testsuites/samples
 
 arm-rtems7-objcopy -O binary titan.exe kernel.img
