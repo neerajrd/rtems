@@ -91,18 +91,10 @@ static int flash_erase(
   return 0;
 }
 
-/* -------- Compressor -------- */
-static rtems_jffs2_compressor_zlib_control compressor_instance = {
-  .super = {
-    .compress = rtems_jffs2_compressor_zlib_compress,
-    .decompress = rtems_jffs2_compressor_zlib_decompress
-  }
-};
-
-/* -------- Mount Data -------- */
+/* -------- Mount Data (No Compressor) -------- */
 static const rtems_jffs2_mount_data mount_data = {
   .flash_control = &flash_instance.super,
-  .compressor_control = &compressor_instance.super
+  .compressor_control = NULL
 };
 
 /* -------- Init Task -------- */
