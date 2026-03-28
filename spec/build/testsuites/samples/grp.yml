@@ -29,6 +29,8 @@ links:
 - role: build-dependency
   uid: hello
 - role: build-dependency
+  uid: titan
+- role: build-dependency
   uid: iostream
 - role: build-dependency
   uid: minimum
