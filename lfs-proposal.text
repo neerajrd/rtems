@@ -66,6 +66,8 @@ July 11 - August 24 (Final Evaluation)
 5. Unit test application to test deliverables
 6. Testing with both in-memory and actual flash hardware
 7. API-level documentation
+8. Developer tutorial explaining how to use littlefs in RTEMS
+9. Documentation for future GSoC contributors to continue development
 
 August 24 - August 31 (Final Results Announced)
 
@@ -79,7 +81,7 @@ August 24 onwards (Post GSoC)
 
 Proposed Schedule
 
-During each phase, code will be incrementally developed and submitted for review. Patches will be shared frequently to ensure continuous feedback and alignment with RTEMS expectations. The project is structured in such a way that each phase produces usable and reviewable code suitable for upstreaming.
+During each phase, code will be incrementally developed and submitted for review. Patches will be shared frequently to ensure continuous feedback and alignment with RTEMS expectations. Each phase will produce incremental deliverables that are either ready for upstreaming or documented. This will ensure that partial progress remains usable and can be extended by future contributors.
 
 March 16 - March 31 (Application Period)
 
