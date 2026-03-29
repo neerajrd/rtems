@@ -26,6 +26,8 @@ Project Scope
 
 Medium Project (175 hours)
 
+Project Description
+
 RTEMS supports flash-based filesystems such as JFFS2; however, there is a need for a lightweight, modern alternative optimized for constrained embedded systems such as microcontrollers. littlefs addresses this by offering low footprint, low RAM usage, fast mount times, and a simple design specifically designed for microcontroller environments.
 
 This project will integrate littlefs into RTEMS under the /contrib directory and implement a wrapper layer that maps RTEMS VFS operations to littlefs APIs. The design will follow an approach similar to the existing JFFS2 integration, providing RTEMS with a compact and robust alternative for flash storage.
