@@ -36,6 +36,8 @@ After completing the littlefs v2 integration, the project will explore and provi
 
 In addition, documentation will be created, including API-level documentation similar to the RTEMS JFFS2 documentation (Doxygen-based), along with a usage guide for developers.
 
+The project will be maintained using modular design, documentation, and alignment with RTEMS coding practices enabling easy future contributions.
+
 Project Deliverables
 
 May 25 (coding begins)
