@@ -1,5 +1,3 @@
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 Project Title
 Port LittleFS to RTEMS
 
@@ -20,119 +18,134 @@ Email
 University
 MIT World Peace University, Pune
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 Project Abstract
 
 Port littlefs v2 into RTEMS as a native filesystem. After completing v2 integration, the project will explore and provide initial integration for littlefs v3.
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Project Scope
 
 Medium Project (175 hours)
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 RTEMS supports flash-based filesystems such as JFFS2; however, there is a need for a lightweight, modern alternative optimized for constrained embedded systems such as microcontrollers. littlefs addresses this by offering low footprint, low RAM usage, fast mount times, and a simple design specifically designed for microcontroller environments.
 
 This project will integrate littlefs into RTEMS under the /contrib directory and implement a wrapper layer that maps RTEMS VFS operations to littlefs APIs. The design will follow an approach similar to the existing JFFS2 integration, providing RTEMS with a compact and robust alternative for flash storage.
 
-After completing the littlefs v2 integration, the project will explore and provide initial integration for littlefs v3, which is currently under development.
+After completing the littlefs v2 integration, the project will explore and provide initial integration for littlefs v3, which introduces changes in API, configuration, on-disk format, and a redesigned file storage structure, and is currently in an experimental stage.
 
 In addition, documentation will be created, including API-level documentation similar to the RTEMS JFFS2 documentation (Doxygen-based), along with a usage guide for developers.
 
-I chose this project due to my interest in embedded systems and C programming. I have also submitted a littlefs demo patch for RTEMS to show my familiarity with RTEMS, littlefs, and STM32 microcontrollers.
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 Project Deliverables
 
-- LittleFS v2 integrated under /contrib
-- RTEMS VFS wrapper implementation
-- Block device interface integration (read/prog/erase/sync)
-- Support for file operations (open/read/write/close/lseek)
-- Directory operations (readdir, mkdir, traversal)
-- Metadata operations (stat, statvfs, rename, truncate)
-- Test application and validation
-- Documentation (design + usage + tutorial)
-- Future contributor guide for continuation (v3 support)
+May 25 (coding begins)
 
-GSoC Timeline
+1. RTEMS development and testing environment set up using Raspberry Pi
+2. Finalized architecture and design
+3. Initial skeleton code structure
+4. Data structures defined for coding in the first half
 
-June 7 (coding begins)
-- RTEMS build environment ready
-- LittleFS studied and initial integration prepared
-- Development repository setup and shared with mentors
+May 25 - July 10 (Midterm Evaluation)
 
-July 12-16 (Midterm Evaluation)
-- Block device integration complete
-- Mount/unmount working
-- Core file operations implemented
-- Basic filesystem functional end-to-end
+1. Import littlefs v2 into RTEMS under /contrib
+2. Flash/block device interface integration
+3. Filesystem mount and unmount capability
+4. RTEMS VFS integration
+5. File I/O operations
+6. File open mode handling
+7. File error handling
+8. Unit test application to test deliverables
+9. Testing on emulated flash
 
-August 16-August 23 (Final Evaluation)
-- Full file + directory + metadata operations complete
-- Stable integration with RTEMS VFS
-- Testing and validation completed
-- Documentation and tutorial prepared
+July 11 - August 24 (Final Evaluation)
 
-August 31 (Final Results Announced)
-- Code cleanup and refinements completed
-- Mentor feedback addressed
+1. Path resolution and navigation
+2. Directory operations
+3. Advanced file operations (truncate, rename)
+4. Filesystem statistics and monitoring
+5. Unit test application to test deliverables
+6. Testing with both in-memory and actual flash hardware
+7. API-level documentation
 
-Post GSoC
-- Continue improving LittleFS integration
-- Work towards LittleFS v3 support
-- Contribute maintenance and enhancements to RTEMS
+August 24 - August 31 (Final Results Announced)
+
+1. Performance optimizations and bug fixes if any
+
+August 24 onwards (Post GSoC)
+
+1. Initial integration for littlefs v3 (with extended timeline)
+2. Full integration support for littlefs v3 (as future work)
+3. Performance optimizations and bug fixes if any
 
 Proposed Schedule
 
-March 14 - March 24 (Application Period)
-- Prepare and refine proposal
-- Submit demo patch
-- Interact with mentors and gather feedback
+During each phase, code will be incrementally developed and submitted for review. Patches will be shared frequently to ensure continuous feedback and alignment with RTEMS expectations. The project is structured in such a way that each phase produces usable and reviewable code suitable for upstreaming.
 
-March 26 - April 22 (Acceptance Waiting Period)
-- Continue contributing small improvements
-- Study RTEMS VFS and LittleFS internals
-- Refine design based on mentor inputs
+March 16 - March 31 (Application Period)
 
-April 23 - May 23 (Community Bonding Period)
-- Study RTEMS VFS internals (mount, handlers, eval_path)
-- Study LittleFS APIs and block model
-- Analyze JFFS2 wrapper
-- Finalize architecture and data structures
-- Setup development and test environment
+- Finalize and submit proposal
+- Submit and refine littlefs demo patch
+- Initial study of littlefs, RTEMS VFS, and reference implementation for JFFS2
 
-May 24 - June 26 (First Half)
-- Implement block device callbacks
-- Integrate with RTEMS flash driver
-- Implement mount/unmount
-- Create filesystem operations table
-- Implement node abstraction and path lookup
-- Implement core file operations
-- Submit code regularly for review
+April 1 - April 30 (Acceptance Waiting Period)
 
-June 27 - August 23 (Second Half)
-- Implement directory operations (readdir, mkdir)
-- Implement metadata operations (stat, rename, truncate)
-- Improve error handling and robustness
-- Add optional features if feasible
-- Perform stress and performance testing
-- Prepare documentation and tutorial
-- Submit final code
+- Respond to mentor queries if any
+- Set up RTEMS development and testing environment using Raspberry Pi
+- Continue studying RTEMS VFS and reference implementation for JFFS2
+- Study and experiment with littlefs v2 APIs and internals
+- Prepare detailed design document and data structure mapping
+
+May 1 - May 24 (Community Bonding Period)
+
+- Finalize architecture and integration with mentors
+- Prepare initial skeleton code structure
+- Define data structures as needed for coding in the first half
+- Ensure readiness for coding phase
+
+May 25 - July 10 (First Half)
+
+- Import littlefs v2 into RTEMS under /contrib
+- Implement flash/block device interface (read/prog/erase/sync)
+- Implement mount and unmount functionality
+- Implement RTEMS VFS integration (map RTEMS FS hooks to littlefs-based implementation)
+- Implement basic file operations for the root path (open/read/write/close/lseek)
+- Implement file open mode handling (map lfs modes to RTEMS/POSIX)
+- Implement file error handling (map lfs errors to RTEMS/POSIX errno)
+- Develop unit test application to test deliverables of first half
+- Perform testing on emulated flash
+
+(Midterm Milestone: Functional filesystem with mount + basic file I/O)
+
+July 11 - August 24 (Second Half)
+
+- Implement path resolution and navigation
+- Implement directory operations (readdir, mkdir, traversal)
+- Implement advanced operations (truncate, rename)
+- Implement filesystem statistics and monitoring
+- Develop unit test application to test deliverables of second half
+- Perform testing on emulated flash and real hardware flash
+- Stabilization, performance validation, and bug fixes
+- Prepare API-level documentation (Doxygen-style, similar to RTEMS JFFS2)
+- Submit final patches for review and inclusion
+
+(Final Milestone: Complete, tested, and documented littlefs v2 integration)
+
+August 24 - August 31 (Evaluation Period)
+
+- Address mentor feedback if required
+- Performance optimizations and bug fixes if any
+
+Optional (Extended Timeline: August 24 - November 2)
+
+- Initial integration for littlefs v3
+- Performance optimizations and bug fixes if any
 
 Future Improvements
 
-- Full support for LittleFS v3
-- Performance optimizations
-- Support for additional RTEMS block devices
-- Extended filesystem features
+- Implement full support for littlefs v3
+- Performance optimizations and bug fixes if any
 
 Continued Involvement
 
-I plan to continue contributing to RTEMS beyond GSoC by maintaining the LittleFS integration, reviewing patches, and supporting future contributors. I aim to grow into an active contributor in RTEMS filesystem development.
+I am willing to continue contributing to RTEMS beyond GSoC by maintaining the littlefs integration, reviewing patches, and providing assistance to future contributors.
 
 Other Commitments
 
@@ -144,31 +157,34 @@ I confirm that I meet the eligibility criteria defined by GSoC 2026 rules.
 
 Major Challenges foreseen
 
-- Mapping RTEMS VFS to LittleFS APIs correctly
-- Handling block device abstraction across platforms
-- Ensuring robustness under edge cases
+1. Mapping RTEMS VFS interfaces to littlefs APIs correctly
+2. Ensuring compliance with RTEMS coding quality and review standards
+3. Testing with all edge cases (power failure, partial writes, block corruption)
+4. Managing scope within the given timeline while ensuring production-quality code
 
 Mitigation:
-- Use JFFS2 wrapper as reference
-- Validate incrementally
-- Regular mentor feedback
+
+1. Study the existing RTEMS JFFS2 wrapper as a reference implementation
+2. Regularly submit patches and incorporate mentor feedback early
+3. Develop comprehensive unit tests covering edge cases and failure scenarios
 
 References
 
 - https://github.com/littlefs-project/littlefs
 - https://github.com/littlefs-project/littlefs/pull/1111
+- https://docs.rtems.org/doxygen/5.2/group__JFFS2.html
 - RTEMS documentation and source tree
 
 Relevant Background Experience
 
-- Embedded systems development
-- C programming
-- Prior LittleFS RTEMS demo patch (March 22, 2026)
-- Familiarity with RTOS and filesystem concepts
+1. C/C++ programming
+2. Embedded systems development with Raspberry Pi and Buildroot
+3. Prior littlefs RTEMS demo patch (March 22, 2026)
+4. Familiarity with RTEMS and STM32 microcontrollers
 
 Personal
 
-I am currently associated with MIT World Peace University, Pune. I am deeply interested in embedded systems, particularly filesystem and storage layers.
+I am currently a second-year Computer Science student at MIT World Peace University, Pune. I am deeply interested in embedded systems, IoT devices, and their cloud backends.
 
 I learned about RTEMS through embedded systems work and open-source exploration.
 
@@ -179,12 +195,56 @@ Free Software Experience/Contributions:
 
 Language Skill Set:
 - C (strong)
-- C++ (moderate)
+- C++ (strong)
 - Python (basic)
 
 Related Research and Work Experience:
-- Embedded systems development experience
-- Work on storage and communication subsystems
+
+1. Experimented with RTEMS on NUCLEO-H753ZI STM32 board and Raspberry Pi
+2. Did basic work with Raspberry Pi and Buildroot to develop an IoT device sending WiFi scan data to a FastAPI-based backend for location tracking.
 
 Reference Links and Web URLs:
-<to be filled>
+https://github.com/architnd
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Deliverables to task mapping:
+
+Flash interface integration:
+3. Flash abstraction layer: Implement a flash abstraction like rtems_lfs_flash_control providing callbacks for read, prog, erase, and sync as required by lfs_config.
+
+Filesystem mount and unmount capability:
+5. Mount flow: Implement rtems_littlefs_initialize() to configure lfs_config, call lfs_mount(), or fall back to lfs_format() + lfs_mount() if mount fails.
+6. Unmount flow: Implement rtems_littlefs_fsunmount() to unmount using lfs_unmount().
+
+RTEMS VFS integration:
+1. VFS integration: Implement rtems_littlefs_ops to map RTEMS filesystem hooks to LittleFS-based implementation, making LittleFS appear as a native RTEMS filesystem.
+2. File handler dispatch: Implement rtems_littlefs_set_location() to select appropriate handler tables for regular files and directories (and symlinks if supported).
+
+File and directory operations support:
+7. Inode management: Implement a littlefs_inode_info structure to map RTEMS inodes to LittleFS objects, storing path/type and embedding lfs_file_t or lfs_dir_t for open handles, handle creation via lfs_file_open()/lfs_mkdir() and deletion via lfs_remove().
+8. Directory management: Implement rtems_littlefs_dir_read() using lfs_dir_open(), lfs_dir_read(), and lfs_dir_close().
+
+Path resolution and navigation:
+9. Path evaluation: Implement rtems_littlefs_eval_path() using path-string-based traversal since LittleFS is path-oriented.
+
+Metadata and attribute handling:
+10. Mode mapping: Implement translation between RTEMS/POSIX mode bits and LittleFS modes.
+4. Superblock and filesystem state: Implement rtems_littlefs_fs_info to hold LittleFS state, including lfs_t and lfs_config.
+
+Error handling and POSIX compliance:
+11. Error translation: Implement mapping between LittleFS error codes and RTEMS/POSIX errno.
+
+File I/O operations (read/write/seek):
+12. File read path: Implement rtems_littlefs_file_read() using lfs_file_read() with proper offset handling via lfs_file_seek().
+13. File write path: Implement rtems_littlefs_file_write() using lfs_file_write() with correct offset/append handling.
+
+Advanced file operations (truncate, rename):
+14. Truncate support: Implement rtems_littlefs_file_ftruncate() using lfs_file_truncate().
+15. Rename functionality: Implement rename support using lfs_rename().
+
+Filesystem statistics and monitoring:
+16. Filesystem statistics: Implement rtems_littlefs_statvfs() using lfs_fs_size() and configuration parameters (block size and count) to derive total and free space.
+17. Flash usage reporting: Implement rtems_littlefs_get_info() to report runtime details such as total flash size, block size, used blocks, and free blocks, etc.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
