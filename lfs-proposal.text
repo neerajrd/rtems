@@ -1,10 +1,12 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 Project Title
 Port LittleFS to RTEMS
 
 Google Summer of Code Program 2026 Project Proposal
 
 Name
-Neeraj Deshpande
+Archit Deshpande
 
 Discord Handle
 <to be filled>
@@ -18,23 +20,31 @@ Email
 University
 MIT World Peace University, Pune
 
-----------------------------------------------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Project Abstract
 
-Port LittleFS v2 into RTEMS as a native filesystem integrated with the RTEMS VFS layer, enabling reliable flash-based storage with wear leveling and power-loss resilience, while ensuring forward compatibility for LittleFS v3.
+Port littlefs v2 into RTEMS as a native filesystem. After completing v2 integration, the project will explore and provide initial integration for littlefs v3.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Project Scope
 
-Medium (approx. 175 hours)
+Medium Project (175 hours)
 
-Project Description
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-RTEMS currently lacks a lightweight, flash-optimized filesystem suitable for embedded systems with constrained memory and power-loss scenarios. LittleFS addresses this gap by providing a small, resilient filesystem designed for microcontrollers.
+RTEMS supports flash-based filesystems such as JFFS2; however, there is a need for a lightweight, modern alternative optimized for constrained embedded systems such as microcontrollers. littlefs addresses this by offering low footprint, low RAM usage, fast mount times, and a simple design specifically designed for microcontroller environments.
 
-This project will integrate LittleFS into RTEMS under /contrib and implement a wrapper layer mapping RTEMS VFS operations to LittleFS APIs. This will provide RTEMS with a modern, robust filesystem alternative suitable for flash storage. I chose this project due to my background in embedded systems and prior work on a demo LittleFS patch for RTEMS.
+This project will integrate littlefs into RTEMS under the /contrib directory and implement a wrapper layer that maps RTEMS VFS operations to littlefs APIs. The design will follow an approach similar to the existing JFFS2 integration, providing RTEMS with a compact and robust alternative for flash storage.
 
-Maintenance will be ensured by keeping the wrapper modular and well-documented, enabling future contributors to extend or maintain the code easily.
+After completing the littlefs v2 integration, the project will explore and provide initial integration for littlefs v3, which is currently under development.
+
+In addition, documentation will be created, including API-level documentation similar to the RTEMS JFFS2 documentation (Doxygen-based), along with a usage guide for developers.
+
+I chose this project due to my interest in embedded systems and C programming. I have also submitted a littlefs demo patch for RTEMS to show my familiarity with RTEMS, littlefs, and STM32 microcontrollers.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Project Deliverables
 
